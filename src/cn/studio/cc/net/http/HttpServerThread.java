@@ -1,41 +1,45 @@
 package cn.studio.cc.net.http;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Arrays;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 
-import cn.studio.cc.net.http.request.Request;
-import cn.studio.cc.net.http.request.RequestLine;
-import cn.studio.cc.net.http.response.Response;
+import cn.studio.cc.utils.LogUtils;
 
 public class HttpServerThread implements Runnable {
-	
+
+	private int port;
+	private int answerThreadNum;
+
+	public HttpServerThread(int port, int answerThreadNum) {
+		this.port = port;
+		this.answerThreadNum = answerThreadNum;
+	}
+
+	private ExecutorService httpThreadPool;
 	@Override
 	public void run() {
-		ServerSocket serverSocket;
-		try {
-			serverSocket = new ServerSocket(8888);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return;
-		}
-		while (true) {
-			try {
-				System.out.println("wait...");
-				
-				Socket socket = serverSocket.accept();
-				HttpServerIThread it = new HttpServerIThread(socket);
-				Thread t = new Thread(it);
-				t.start();
-			} catch (IOException e) {
-				e.printStackTrace();
+		ThreadFactory threadFactory = new HttpAnswerThreadFactory();
+		httpThreadPool = Executors.newFixedThreadPool(answerThreadNum, threadFactory);
+
+		try (
+				ServerSocket serverSocket = new ServerSocket(port);
+				) {
+			while (true) {
+				try {
+					LogUtils.debug("µÈ´ýÇëÇó");
+					Socket socket = serverSocket.accept();
+					HttpServerIThread it = new HttpServerIThread(socket);
+					httpThreadPool.execute(it);
+				} catch (IOException e) {
+					LogUtils.error(e);
+				}
 			}
+		} catch (IOException e) {
+			LogUtils.error(e);
 		}
 	}
-	
 }
