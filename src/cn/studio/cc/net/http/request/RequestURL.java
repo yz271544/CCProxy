@@ -1,5 +1,10 @@
 package cn.studio.cc.net.http.request;
 
+/**
+ * 
+ * @author CC
+ *
+ */
 public class RequestURL {
 	public static final String PROTOCOL_DEFAULT = "http";
 	public final String protocol;
