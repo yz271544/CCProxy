@@ -1,14 +1,14 @@
 package cn.studio.cc.net.http;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
-
-public class HttpServer {
+/**
+ * 
+ * @author CC
+ *
+ */
+public class HttpProxy {
 	private int port;
 
-	public HttpServer(int port) {
+	public HttpProxy(int port) {
 		this.port = port;
 	}
 	
