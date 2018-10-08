@@ -1,13 +1,11 @@
 package cn.studio.cc.net.http;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 
 import cn.studio.cc.net.http.request.Request;
 import cn.studio.cc.net.http.response.Response;
@@ -33,8 +31,8 @@ public class HttpAnswerThread implements Runnable {
 					OutputStream osN = socketN.getOutputStream();
 					InputStream isN = socketN.getInputStream();
 					
-					HttpServerIPThread t1 = new HttpServerIPThread(is, osN);
-					HttpServerIPThread t2 = new HttpServerIPThread(isN, os);
+					HttpTunnelThread t1 = new HttpTunnelThread(is, osN);
+					HttpTunnelThread t2 = new HttpTunnelThread(isN, os);
 					Thread tt1 = new Thread(t1);
 					tt1.start();
 					Thread tt2 = new Thread(t2);
@@ -81,10 +79,6 @@ public class HttpAnswerThread implements Runnable {
 					os.flush();
 					System.out.println("========");
 				}
-
-				//if (!"keep-alive".equals(response.header.getProxyConnection())) {
-					//break;
-				//}
 			}
 			
 		} catch (IOException e) {

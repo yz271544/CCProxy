@@ -13,12 +13,12 @@ import cn.studio.cc.net.http.request.Request;
 import cn.studio.cc.net.http.response.Response;
 import cn.studio.cc.utils.StreamUtils;
 
-public class HttpServerIPThread implements Runnable {
+public class HttpTunnelThread implements Runnable {
 
 	private InputStream is;
 	private OutputStream os;
 	
-	public HttpServerIPThread(InputStream is, OutputStream os) {
+	public HttpTunnelThread(InputStream is, OutputStream os) {
 		this.is = is;
 		this.os = os;
 	}
