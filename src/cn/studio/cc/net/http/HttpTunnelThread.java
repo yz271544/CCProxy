@@ -1,17 +1,10 @@
 package cn.studio.cc.net.http;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.Socket;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 
-import cn.studio.cc.net.http.request.Request;
-import cn.studio.cc.net.http.response.Response;
-import cn.studio.cc.utils.StreamUtils;
+import cn.studio.cc.utils.LogUtils;
 
 public class HttpTunnelThread implements Runnable {
 
@@ -26,12 +19,15 @@ public class HttpTunnelThread implements Runnable {
 	@Override
 	public void run() {
 		int bT = -1;
-		try {
+		try (
+				InputStream is = this.is;
+				OutputStream os = this.os;
+				) {
 			while ((bT = is.read()) != -1) {
 				os.write(bT);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			LogUtils.error(e);
 		}
 	}
 }
