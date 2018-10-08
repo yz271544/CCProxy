@@ -9,12 +9,12 @@ import java.util.concurrent.ThreadFactory;
 
 import cn.studio.cc.utils.LogUtils;
 
-public class HttpServerThread implements Runnable {
+public class HttpProxyThread implements Runnable {
 
 	private int port;
 	private int answerThreadNum;
 
-	public HttpServerThread(int port, int answerThreadNum) {
+	public HttpProxyThread(int port, int answerThreadNum) {
 		this.port = port;
 		this.answerThreadNum = answerThreadNum;
 	}
@@ -32,7 +32,7 @@ public class HttpServerThread implements Runnable {
 				try {
 					LogUtils.debug("µÈ´ýÇëÇó");
 					Socket socket = serverSocket.accept();
-					HttpServerIThread it = new HttpServerIThread(socket);
+					HttpAnswerThread it = new HttpAnswerThread(socket);
 					httpThreadPool.execute(it);
 				} catch (IOException e) {
 					LogUtils.error(e);

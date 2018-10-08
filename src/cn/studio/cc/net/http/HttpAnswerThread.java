@@ -13,11 +13,11 @@ import cn.studio.cc.net.http.request.Request;
 import cn.studio.cc.net.http.response.Response;
 import cn.studio.cc.utils.StreamUtils;
 
-public class HttpServerIThread implements Runnable {
+public class HttpAnswerThread implements Runnable {
 
 	private Socket socket;
 	
-	public HttpServerIThread(Socket socket) {
+	public HttpAnswerThread(Socket socket) {
 		this.socket = socket;
 	}
 

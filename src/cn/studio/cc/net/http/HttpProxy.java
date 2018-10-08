@@ -16,7 +16,7 @@ public class HttpProxy {
 	}
 	
 	public void start() {
-		Thread t = new Thread(new HttpServerThread(port, answerThreadNum), "Http代理监听线程");
+		Thread t = new Thread(new HttpProxyThread(port, answerThreadNum), "Http代理监听线程");
 		t.start();
 	}
 }
