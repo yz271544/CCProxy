@@ -23,6 +23,7 @@ public class HttpAnswerThread implements Runnable {
 	public void run() {
 		Socket socketN = null;
 		boolean connect = false;
+		boolean keepAlive = true;
 		try {
 			while (true) {
 				if (connect) {
@@ -72,12 +73,19 @@ public class HttpAnswerThread implements Runnable {
 							gzipis.close();
 						}
 						rB = response.response;
+						
+						if (!"keep-alive".equals(response.header.getConnection())) {
+							keepAlive = false;
+						}
 					}
 					
 					OutputStream os = socket.getOutputStream();
 					os.write(rB);
 					os.flush();
 					System.out.println("========");
+					if (!keepAlive) {
+						break;
+					}
 				}
 			}
 			

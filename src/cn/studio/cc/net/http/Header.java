@@ -44,6 +44,9 @@ public class Header {
 	public String getTransferEncoding() {
 		return getValue("Transfer-Encoding");
 	}
+	public String getConnection() {
+		return getValue("Connection");
+	}
 	private String getValue(String key) {
 		List<String> valueList = headerMap.get(key);
 		if (valueList == null || valueList.size() == 0) {
