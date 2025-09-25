@@ -39,7 +39,7 @@ public class Response {
 		} else {
 			body = StreamUtils.inputToByte(is);
 		}
-		System.out.println("body.length=" + body.length + " contentLength=" + contentLength);
+		//System.out.println("body.length=" + body.length + " contentLength=" + contentLength);
 		baos.write(body);
 		
 		response = baos.toByteArray();

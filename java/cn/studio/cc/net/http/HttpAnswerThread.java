@@ -42,10 +42,10 @@ public class HttpAnswerThread implements Runnable {
 				} else {
 					InputStream is = socket.getInputStream();
 					Request request = new Request(is);
-					if (request.requestLine.requestURL.host.equals("im.qq.com")) {
-						System.out.println(1);
-					}
-					System.out.println(new String(request.request));
+					//if (request.requestLine.requestURL.host.equals("im.qq.com")) {
+					//	System.out.println(1);
+					//}
+					//System.out.println(new String(request.request));
 					
 					byte[] rB = null;
 					if (request.requestLine.method.equals("CONNECT")) {
@@ -64,12 +64,12 @@ public class HttpAnswerThread implements Runnable {
 						
 						InputStream isN = socketN.getInputStream();
 						Response response = new Response(isN);
-						System.out.println(request.requestLine + ":::::");
-						System.out.println(new String(response.response));
+						//System.out.println(request.requestLine + ":::::");
+						//System.out.println(new String(response.response));
 						if ("gzip".equals(response.header.getContentEncoding()) && !"chunked".equals(response.header.getTransferEncoding())) {
 							GZIPInputStream gzipis = new GZIPInputStream(new ByteArrayInputStream(response.body));
 							byte[] bb = StreamUtils.inputToByte(gzipis);
-							System.out.println(new String(bb));
+							//System.out.println(new String(bb));
 							gzipis.close();
 						}
 						rB = response.response;
@@ -82,7 +82,7 @@ public class HttpAnswerThread implements Runnable {
 					OutputStream os = socket.getOutputStream();
 					os.write(rB);
 					os.flush();
-					System.out.println("========");
+					//System.out.println("========");
 					if (!keepAlive) {
 						break;
 					}
