@@ -6,6 +6,7 @@ cn/studio/cc/net/http/HttpAnswerThreadFactory$1.class
 cn/studio/cc/utils/LogUtils.class
 cn/studio/cc/net/http/response/StatusLine.class
 cn/studio/cc/utils/StreamUtils.class
+cn/studio/cc/config/ConfigManager.class
 cn/studio/cc/net/http/HttpProxyThread.class
 cn/studio/cc/net/http/HttpAnswerThread.class
 cn/studio/cc/CCProxy.class

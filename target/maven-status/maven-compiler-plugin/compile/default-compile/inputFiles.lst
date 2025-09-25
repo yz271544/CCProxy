@@ -12,4 +12,5 @@
 /data/lyndon/iProject/javapath/CCProxy/java/cn/studio/cc/net/http/response/StatusLine.java
 /data/lyndon/iProject/javapath/CCProxy/java/cn/studio/cc/net/http/HttpAnswerThreadFactory.java
 /data/lyndon/iProject/javapath/CCProxy/java/cn/studio/cc/utils/StreamUtils.java
+/data/lyndon/iProject/javapath/CCProxy/java/cn/studio/cc/config/ConfigManager.java
 /data/lyndon/iProject/javapath/CCProxy/java/cn/studio/cc/net/http/HttpTunnelThread.java
